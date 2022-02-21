@@ -1,0 +1,5 @@
+
+include ./deepracer_track_geometry/routes/*.npy
+include VERSION
+include LICENSE.txt
+include README.md

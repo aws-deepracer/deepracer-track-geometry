@@ -1,0 +1,4 @@
+<launch>
+  <param name="test_module" value="."/>
+  <test test-name="deepracer_track_geometry" pkg="deepracer_track_geometry" type="pytest_runner.py" />
+</launch>

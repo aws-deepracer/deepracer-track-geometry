@@ -1,17 +1,14 @@
-## My Project
+## AWS DeepRacer Track Geometry
 
-TODO: Fill this README out!
+The AWS DeepRacer Track Geometry package provides a simple interface to access "RL Lab - DeepRacer" track information.
+ 
+## Installation
 
-Be sure to:
+To install AWS DeepRacer Track Geometry package, use `pip install deepracer-track-geometry`.
 
-* Change the title in this README
-* Edit your repository description on GitHub
-
-## Security
-
-See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
+Python 3.6, 3.7, 3.8, and 3.9 are supported on Linux, Windows, and macOS.
 
 ## License
 
-This project is licensed under the Apache-2.0 License.
+The source code is released under [Apache 2.0](https://aws.amazon.com/apache-2-0/).
 
