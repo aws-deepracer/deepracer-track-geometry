@@ -57,6 +57,7 @@ setup_args = {
     "package_dir": {"": "."},
     "description": "Open source library to access DeepRacer track geometry.",
     "long_description": read("README.md"),
+    "long_description_content_type": 'text/markdown',
     "author": "Amazon Web Services",
     "url": "https://github.com/aws-deepracer/deepracer-track-geometry",
     "license": "Apache License 2.0",
