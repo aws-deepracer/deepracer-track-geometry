@@ -486,8 +486,8 @@ class TrackGeometry(object):
                     coordinates: Union[List, np.ndarray, Point]) -> bool:
         """
         Check if the given point is on track.
-        On track means that the point is in inner lane region or outer lane region or
-        on track center line.
+        On track means that the point is in inner lane region or outer lane region
+        including boundary
         NOTE: if the point is on inner or outer border, we consider it as offtrack.
 
         Args:
@@ -497,17 +497,18 @@ class TrackGeometry(object):
             bool: if the given point is on track.
         """
         point = to_shapely_point(coordinates)
-        return self.inner_lane.contains(point) or \
-            self.outer_lane.contains(point) or \
-            self.track_center_line.contains(point)
+        return self.inner_lane.intersects(point) or \
+            self.outer_lane.intersects(point)
 
     def get_region_on_track(self,
                             coordinates: Union[List, np.ndarray, Point]) -> TrackRegion:
         """
         Get the region the coordinates are in.
-        NOTE: if the point is on inner border,  we consider it as inner offtrack.
-        if the point is on outer border,  we consider it as outer offtrack.
-        if the point is on track center line,  we consider it on inner lane.
+
+        If the point is on inner lane including boundary,  we consider it as inner lane.
+        Else if the point is on outer lane including boundary,  we consider it as outer lane.
+        Else if the point is on inner offtrack including boundary, we consider it as inner offtrack.
+        Else if the point is on outer offtrack including boundary, we consider it as outer offtrack
 
         Args:
             coordinates (Union[List, np.ndarray, Point]): the coordinates to check which region it is on track.
@@ -516,11 +517,11 @@ class TrackGeometry(object):
             TrackRegion: enum for which track region is the point in.
         """
         point = to_shapely_point(coordinates)
-        if self.inner_lane.contains(point) or self.track_center_line.contains(point):
+        if self.inner_lane.intersects(point):
             return TrackRegion.INNER_LANE
-        elif self.outer_lane.contains(point):
+        elif self.outer_lane.intersects(point):
             return TrackRegion.OUTER_LANE
-        elif self.inner_offtrack.contains(point) or self.inner_border_line.contains(point):
+        elif self.inner_offtrack.intersects(point):
             return TrackRegion.INNER_OFFTRACK
         else:
             return TrackRegion.OUTER_OFFTRACK
